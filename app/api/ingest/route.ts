@@ -6,7 +6,6 @@ const anthropic = new Anthropic();
 const openai = new OpenAI();
 
 // Max file size 25MB (Whisper limit)
-export const config = { api: { bodyParser: false } };
 
 function generateId(): string {
   return Math.random().toString(36).slice(2, 10);

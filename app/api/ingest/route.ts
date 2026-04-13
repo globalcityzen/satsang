@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import OpenAI from "openai";
 
 const anthropic = new Anthropic();
-const openai = new OpenAI();
 
 // Max file size 25MB (Whisper limit)
 
@@ -21,29 +19,7 @@ async function extractTextFromFile(file: File): Promise<string> {
     return await file.text();
   }
 
-  // Audio/video — transcribe with Whisper
-  if (["mp3", "mp4", "m4a", "wav", "ogg", "webm"].includes(ext)) {
-    const buffer = await file.arrayBuffer();
-    const blob = new Blob([buffer], { type: file.type });
-    const transcribable = new File([blob], file.name, { type: file.type });
-
-    const transcription = await openai.audio.transcriptions.create({
-      file: transcribable,
-      model: "whisper-1",
-      language: "en",
-    });
-    return transcription.text;
-  }
-
-  // PDF — extract text via simple approach
-  if (ext === "pdf") {
-    // For MVP we read as text — works for text-based PDFs
-    // For scanned PDFs, user can paste text manually
-    const text = await file.text();
-    return text;
-  }
-
-  throw new Error(`Unsupported file type: ${ext}`);
+  throw new Error(`Unsupported file type: ${ext}. Only .txt and .md files are supported.`);
 }
 
 // ── Claude extraction prompt ───────────────────────────────

@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --purple: #7F77DD;
+  --purple-light: #EEEDFE;
+  --purple-mid: #AFA9EC;
+  --purple-dark: #534AB7;
+  --purple-deep: #3C3489;
+  --bg: #0a0a0f;
+  --bg-card: #111118;
+  --text: #e8e6f0;
+  --text-muted: #7a7890;
+  --text-dim: #3d3b52;
+  --border: rgba(127, 119, 221, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, 'Times New Roman', serif;
+  overflow-x: hidden;
+}
+
+* { touch-action: manipulation; }

@@ -1,0 +1,373 @@
+export interface Teaching {
+  id: string;
+  source: string;       // e.g. "Ashtavakra Gita 1.3"
+  text: string;         // the teaching itself
+  carryLine: string;    // one-line distillation to carry into the day
+  tags: string[];       // themes for retrieval
+}
+
+// 50 hand-curated teachings from the Vedantic canon.
+// These are the seed corpus — your satsang recordings will augment this.
+export const SEED_TEACHINGS: Teaching[] = [
+  {
+    id: "ag-1-3",
+    source: "Ashtavakra Gita 1.3",
+    text: "You are not the body, nor does the body belong to you. You are not the doer, nor the enjoyer. You are pure awareness — the eternal witness. Be free.",
+    carryLine: "I am the witness, not the story.",
+    tags: ["identity", "awareness", "non-attachment", "freedom"],
+  },
+  {
+    id: "bg-2-47",
+    source: "Bhagavad Gita 2.47",
+    text: "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions. Never consider yourself the cause of the results of your activities, and never be attached to not doing your duty.",
+    carryLine: "Act fully. Cling to nothing.",
+    tags: ["karma", "action", "non-attachment", "duty", "doing"],
+  },
+  {
+    id: "bg-2-20",
+    source: "Bhagavad Gita 2.20",
+    text: "The soul is never born nor dies at any time. It has not come into being, does not come into being, and will not come into being. It is unborn, eternal, ever-existing, and primeval. It is not slain when the body is slain.",
+    carryLine: "What I am cannot be threatened.",
+    tags: ["death", "fear", "identity", "permanence", "self"],
+  },
+  {
+    id: "mand-2",
+    source: "Mandukya Upanishad 2",
+    text: "All this is Brahman. This Self is Brahman. This same Self has four quarters.",
+    carryLine: "Everything I see is the Self looking at itself.",
+    tags: ["oneness", "brahman", "perception", "non-duality"],
+  },
+  {
+    id: "ramana-who",
+    source: "Ramana Maharshi",
+    text: "The question 'Who am I?' is not really meant to get an answer. The question 'Who am I?' is meant to dissolve the questioner.",
+    carryLine: "The seeker is what is sought.",
+    tags: ["self-inquiry", "identity", "ego", "dissolution"],
+  },
+  {
+    id: "ramana-witness",
+    source: "Ramana Maharshi",
+    text: "Remain as witness to whatever happens, adopting the attitude: let whatever strange things happen, happen; let us see. This is the key to enquiry.",
+    carryLine: "Let it arise. Let it pass. I remain.",
+    tags: ["witness", "equanimity", "awareness", "practice"],
+  },
+  {
+    id: "ramana-self",
+    source: "Ramana Maharshi",
+    text: "The Self alone is real. All else is unreal. The mind and intellect do not remain apart from you.",
+    carryLine: "Only the Self is real.",
+    tags: ["self", "reality", "mind", "non-duality"],
+  },
+  {
+    id: "nisarg-1",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "The real does not die, the unreal never lived. Once you know that death happens to the body and not to you, you just watch your body falling off like a discarded garment.",
+    carryLine: "The real in me does not die.",
+    tags: ["death", "fear", "identity", "permanence"],
+  },
+  {
+    id: "nisarg-2",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "You are not what you think yourself to be. Find out what you are. Watch the sense 'I am', find your real Self.",
+    carryLine: "I am not what I think I am.",
+    tags: ["identity", "self-inquiry", "awareness", "ego"],
+  },
+  {
+    id: "nisarg-3",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "All craving is due to a sense of insufficiency. When you know yourself to be complete, you are at peace.",
+    carryLine: "I am already complete.",
+    tags: ["craving", "addiction", "completeness", "peace", "desire"],
+  },
+  {
+    id: "nisarg-4",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "Suffering is due entirely to clinging or resisting. It is a sign of our unwillingness to move on, to flow with life.",
+    carryLine: "Suffering is clinging. I can let go.",
+    tags: ["suffering", "addiction", "resistance", "flow", "letting-go"],
+  },
+  {
+    id: "nisarg-5",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "The greatest guru is your inner self. Truly, he is the supreme teacher. He alone can take you to your goal, and he alone meets you at the end of the road.",
+    carryLine: "The teacher I need is already inside.",
+    tags: ["guru", "self", "guidance", "inner-wisdom"],
+  },
+  {
+    id: "isha-1",
+    source: "Isha Upanishad 1",
+    text: "All this — whatever exists in this changing universe — should be covered by the Lord. Protect yourself through that detachment. Do not covet anyone's wealth.",
+    carryLine: "Let the Infinite fill the space where wanting was.",
+    tags: ["non-attachment", "desire", "sufficiency", "letting-go"],
+  },
+  {
+    id: "kena-1",
+    source: "Kena Upanishad 1.3",
+    text: "It is not known by those who know it; it is known by those who do not know it. The one who thinks Brahman is not known has the real knowledge of Brahman; the one who thinks Brahman is known does not know Brahman.",
+    carryLine: "What I seek cannot be grasped — only recognized.",
+    tags: ["knowledge", "brahman", "paradox", "knowing"],
+  },
+  {
+    id: "chandogya-tat",
+    source: "Chandogya Upanishad 6.8.7",
+    text: "Tat tvam asi — That thou art.",
+    carryLine: "That which I seek is what I am.",
+    tags: ["identity", "brahman", "non-duality", "self"],
+  },
+  {
+    id: "brihadaranyaka-aham",
+    source: "Brihadaranyaka Upanishad 1.4.10",
+    text: "Aham Brahmasmi — I am Brahman.",
+    carryLine: "I am not the drop. I am the ocean.",
+    tags: ["identity", "brahman", "non-duality", "self"],
+  },
+  {
+    id: "ag-2-1",
+    source: "Ashtavakra Gita 2.1",
+    text: "Oh! I am spotless, at peace, pure awareness. I have been deceived by illusion for a long time, thinking myself a knower, a doer, a sufferer.",
+    carryLine: "I am not the one who suffers. I am the one who witnesses.",
+    tags: ["suffering", "identity", "witness", "maya", "illusion"],
+  },
+  {
+    id: "ag-11-7",
+    source: "Ashtavakra Gita 11.7",
+    text: "The wise person who has come to know the Self does not crave for liberation or bondage. Free from all desire and sorrow, he just is.",
+    carryLine: "There is nothing I need to become.",
+    tags: ["liberation", "desire", "sorrow", "completeness"],
+  },
+  {
+    id: "viveka-maya",
+    source: "Swami Vivekananda",
+    text: "We are what our thoughts have made us; so take care about what you think. Words are secondary. Thoughts live; they travel far.",
+    carryLine: "My thoughts are seeds. Plant them wisely.",
+    tags: ["mind", "thoughts", "intention", "practice"],
+  },
+  {
+    id: "viveka-strength",
+    source: "Swami Vivekananda",
+    text: "Strength is life; weakness is death. Expansion is life; contraction is death. Love is life; hatred is death.",
+    carryLine: "Today I expand. I do not contract.",
+    tags: ["strength", "expansion", "purpose", "vitality"],
+  },
+  {
+    id: "viveka-fear",
+    source: "Swami Vivekananda",
+    text: "The greatest sin is to think yourself weak. Stand up, be bold, be strong. Take the whole responsibility on your own shoulders, and know that you are the creator of your own destiny.",
+    carryLine: "I am not weak. I am awareness itself.",
+    tags: ["fear", "strength", "identity", "responsibility"],
+  },
+  {
+    id: "shankara-viveka",
+    source: "Adi Shankaracharya, Vivekachudamani",
+    text: "The ignorant man identifies the Self with the body, but the wise man, whose intellect is free from doubt, knows the Self as distinct from the body and beyond.",
+    carryLine: "I am not what I see in the mirror.",
+    tags: ["identity", "body", "wisdom", "discrimination"],
+  },
+  {
+    id: "shankara-maya",
+    source: "Adi Shankaracharya",
+    text: "Brahma Satyam, Jagat Mithya — Brahman alone is real. The world is appearance.",
+    carryLine: "The problem I face is real enough to engage. Not real enough to own me.",
+    tags: ["maya", "reality", "non-attachment", "equanimity"],
+  },
+  {
+    id: "yoga-sutra-1-2",
+    source: "Patanjali, Yoga Sutras 1.2",
+    text: "Yogas chitta vritti nirodhah — Yoga is the cessation of the fluctuations of the mind.",
+    carryLine: "When the mind goes still, what remains is what I am.",
+    tags: ["meditation", "mind", "stillness", "practice"],
+  },
+  {
+    id: "yoga-sutra-1-3",
+    source: "Patanjali, Yoga Sutras 1.3",
+    text: "Tada drashtuh svarupe avasthanam — Then the seer abides in its own true nature.",
+    carryLine: "In stillness, I rest in what I always was.",
+    tags: ["meditation", "self", "stillness", "awareness"],
+  },
+  {
+    id: "bg-6-5",
+    source: "Bhagavad Gita 6.5",
+    text: "Let a person lift themselves by their own Self alone, and let them not lower themselves; for this Self alone is the friend of oneself, and this Self alone is the enemy of oneself.",
+    carryLine: "My only adversary is my own forgetting.",
+    tags: ["self", "discipline", "practice", "responsibility"],
+  },
+  {
+    id: "bg-9-22",
+    source: "Bhagavad Gita 9.22",
+    text: "To those who worship Me with devotion, meditating on My transcendental form, I carry what they lack and preserve what they have.",
+    carryLine: "Something larger than me is holding this.",
+    tags: ["surrender", "trust", "devotion", "letting-go"],
+  },
+  {
+    id: "bg-12-13",
+    source: "Bhagavad Gita 12.13–14",
+    text: "One who is not envious but is a kind friend to all creatures, who does not think himself a proprietor, who is free from false ego, equal in distress and happiness — such a person is very dear to Me.",
+    carryLine: "I need nothing from anyone to be at peace.",
+    tags: ["equanimity", "compassion", "ego", "peace"],
+  },
+  {
+    id: "tukaram-1",
+    source: "Sant Tukaram",
+    text: "God is in the pangs of hunger, God is in the cry of a child, God is in the tears of the grieving. If you seek the divine, seek it in the suffering of the world.",
+    carryLine: "The sacred is not elsewhere. It is here.",
+    tags: ["presence", "service", "devotion", "compassion"],
+  },
+  {
+    id: "kabir-1",
+    source: "Kabir",
+    text: "The river that flows in you also flows in me. The cloud that sails above us both is the same cloud. The same life flows through all living beings.",
+    carryLine: "We are not separate.",
+    tags: ["oneness", "non-duality", "connection", "compassion"],
+  },
+  {
+    id: "kabir-2",
+    source: "Kabir",
+    text: "I have been thinking of the difference between water and the waves on it. Rising, water's still water, falling back, it is water — will you give me a hint how to tell them apart?",
+    carryLine: "The Self is the ocean. The ego is just a wave.",
+    tags: ["identity", "ego", "self", "non-duality"],
+  },
+  {
+    id: "mirabai-1",
+    source: "Mirabai",
+    text: "I have felt the swaying of the elephant's shoulders; and now you want me to climb on a jackass? Try to be serious.",
+    carryLine: "Once you have tasted truth, lesser things lose their pull.",
+    tags: ["addiction", "craving", "liberation", "desire"],
+  },
+  {
+    id: "rumi-wound",
+    source: "Rumi, Masnavi",
+    text: "The wound is the place where the light enters you.",
+    carryLine: "This difficulty is a doorway.",
+    tags: ["suffering", "transformation", "difficulty", "opening"],
+  },
+  {
+    id: "rumi-silence",
+    source: "Rumi",
+    text: "Silence is the language of God. All else is poor translation.",
+    carryLine: "In the silence between thoughts is what I seek.",
+    tags: ["silence", "meditation", "stillness", "divine"],
+  },
+  {
+    id: "rumi-search",
+    source: "Rumi",
+    text: "What you seek is seeking you.",
+    carryLine: "The Self I look for is looking through these eyes.",
+    tags: ["seeking", "self", "awareness", "non-duality"],
+  },
+  {
+    id: "nisarg-morning",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "In the morning, at the very moment of waking, before any thought arises, there is a moment of pure being. That is your real state. All day long you can return to it.",
+    carryLine: "Before the first thought — that is what I am.",
+    tags: ["morning", "awareness", "practice", "waking"],
+  },
+  {
+    id: "bg-4-38",
+    source: "Bhagavad Gita 4.38",
+    text: "There is nothing in this world as purifying as knowledge. He who has attained to purity by the practice of yoga himself finds it in the Self in due time.",
+    carryLine: "Practice purifies. I do not need to force it.",
+    tags: ["practice", "knowledge", "patience", "purification"],
+  },
+  {
+    id: "upanishad-prana",
+    source: "Taittiriya Upanishad 2.1",
+    text: "From the Self sprang space; from space, air; from air, fire; from fire, water; from water, earth. All this is Self. In truth, the Self is Brahman.",
+    carryLine: "Everything I encounter today is the Self in form.",
+    tags: ["oneness", "nature", "brahman", "presence"],
+  },
+  {
+    id: "mahamrityunjaya",
+    source: "Rig Veda — Mahamrityunjaya",
+    text: "We worship the three-eyed one who is fragrant and who nourishes all living beings. May he liberate us from death for the sake of immortality, even as the cucumber is severed from its bondage to the creeper.",
+    carryLine: "I am being freed from what binds me — even now.",
+    tags: ["liberation", "bondage", "freedom", "addiction"],
+  },
+  {
+    id: "atma-bodha-1",
+    source: "Shankaracharya, Atma Bodha 2",
+    text: "Just as fire is the direct cause of cooking, so Knowledge, and not any other form of discipline, is the direct cause of Liberation.",
+    carryLine: "Knowledge liberates. Not effort alone.",
+    tags: ["knowledge", "liberation", "practice", "wisdom"],
+  },
+  {
+    id: "nisarg-addiction",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "Pleasure and pain are momentary. The Self is not. When you stop running toward pleasure and away from pain, you find what was always already here.",
+    carryLine: "I am not the craving. I am what watches the craving.",
+    tags: ["addiction", "craving", "pleasure", "pain", "witness"],
+  },
+  {
+    id: "bg-3-42",
+    source: "Bhagavad Gita 3.42",
+    text: "The senses are higher than the body; higher than the senses is the mind; higher than the mind is the intellect; and higher than the intellect is the Self.",
+    carryLine: "I am larger than any craving the body produces.",
+    tags: ["addiction", "craving", "identity", "self", "body"],
+  },
+  {
+    id: "ramana-craving",
+    source: "Ramana Maharshi",
+    text: "Wanting to reform the world without discovering your true Self is like trying to cover the world with leather to avoid the pain of walking on stones and thorns. It is much simpler to wear shoes.",
+    carryLine: "The work begins inside.",
+    tags: ["self-inquiry", "inner-work", "purpose", "beginning"],
+  },
+  {
+    id: "bg-6-17",
+    source: "Bhagavad Gita 6.17",
+    text: "For one who is moderate in eating and recreation, temperate in work, and regulated in sleep and wakefulness, practicing yoga destroys all suffering.",
+    carryLine: "Moderation is not deprivation. It is freedom.",
+    tags: ["moderation", "addiction", "discipline", "balance"],
+  },
+  {
+    id: "upanishad-neti",
+    source: "Brihadaranyaka Upanishad 3.9.26",
+    text: "Neti, neti — not this, not this. The Self cannot be grasped as this or that. It is unseizable, for it cannot be seized.",
+    carryLine: "I am not this thought. Not this feeling. Not this habit.",
+    tags: ["neti-neti", "identity", "discrimination", "self-inquiry"],
+  },
+  {
+    id: "shankara-waves",
+    source: "Shankaracharya, Vivekachudamani 476",
+    text: "The ocean does not go after the waves. The waves rise and fall in the ocean. Remain as the ocean.",
+    carryLine: "I am the ocean. Let the waves do what waves do.",
+    tags: ["equanimity", "awareness", "witness", "stillness"],
+  },
+  {
+    id: "nisarg-purpose",
+    source: "Nisargadatta Maharaj, I Am That",
+    text: "Find out what it is that makes you go to sleep and what wakes you up. That which is always awake — that is your real nature. All else is borrowed.",
+    carryLine: "What am I before the doing begins?",
+    tags: ["purpose", "morning", "waking", "self-inquiry"],
+  },
+  {
+    id: "bg-18-66",
+    source: "Bhagavad Gita 18.66",
+    text: "Abandon all varieties of religion and just surrender unto Me. I shall deliver you from all sinful reactions. Do not fear.",
+    carryLine: "I can let go of all of it. Something holds me.",
+    tags: ["surrender", "trust", "letting-go", "fear"],
+  },
+  {
+    id: "mandukya-3",
+    source: "Mandukya Upanishad 7",
+    text: "The fourth state — Turiya — is not that which is conscious of the inner world, nor that which is conscious of the outer world, nor that which is conscious of both. It is pure consciousness itself.",
+    carryLine: "Beneath waking, dreaming, and sleep is what I am.",
+    tags: ["consciousness", "awareness", "turiya", "meditation"],
+  },
+  {
+    id: "viveka-infinite",
+    source: "Swami Vivekananda",
+    text: "Each soul is potentially divine. The goal is to manifest this divinity within, by controlling nature, external and internal. Do this either by work, or worship, or psychic control, or philosophy — by one or more or all of these — and be free.",
+    carryLine: "I am not trying to become divine. I am remembering what I am.",
+    tags: ["divinity", "self", "liberation", "purpose"],
+  },
+];
+
+// Return a random teaching — used as fallback when RAG is not available
+export function getRandomTeaching(): Teaching {
+  const idx = Math.floor(Math.random() * SEED_TEACHINGS.length);
+  return SEED_TEACHINGS[idx];
+}
+
+// Get a teaching by ID
+export function getTeachingById(id: string): Teaching | undefined {
+  return SEED_TEACHINGS.find((t) => t.id === id);
+}
